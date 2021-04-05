@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 <meta charset="utf-8">
@@ -8,6 +8,8 @@
 <title>NTG Hub Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
 <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -141,8 +143,15 @@
 	            </a>
 	          </li>
 
+            <li>
+              <a href="#" class="">
+                <i class="metismenu-icon pe-7s-id"></i>
+                Customer List
+              </a>
+            </li>
+
 	          <li>
-	            <a href="#" class="">
+	            <a href="{{route('getVerification')}}" class="{{ ($header == 'verification') ? 'mm-active' : '' }}">
 	              <i class="metismenu-icon pe-7s-check"></i>
 	              Customer Verification
 	            </a>

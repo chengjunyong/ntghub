@@ -22,3 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/RegisterCustomer','HomeController@getRegisterCustomer')->name('getRegisterCustomer');
+Route::post('/RegisterCustomer','HomeController@postRegisterCustomer')->name('postRegisterCustomer');
+Route::get('/Verification','HomeController@getVerification')->name('getVerification');
+Route::post('/Verification','HomeController@postVerification')->name('postVerification');
+Route::post('/getCustomerDetails','HomeController@getCustomerDetails')->name('getCustomerDetails');
