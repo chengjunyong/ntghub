@@ -42,11 +42,11 @@
       @csrf
       <div class="row">
         <div class="col-md-6">
-          <label>Card Number</label><br/>
+          <label>Card ID</label><br/>
           <input type="number" name="card_number" class="form-control" step="1" placeholder="Card Serial Number" required/>
         </div>
         <div class="col-md-6">
-          <label>Scaning Card Serial Code</label><br/>
+          <label>Card Code (Scan Member Card)</label><br/>
           <input type="text" name="card_code" class="form-control" placeholder="Please use card reader to scan customer member card." required/>
         </div>
         <div class="col-md-6">

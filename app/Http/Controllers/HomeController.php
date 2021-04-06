@@ -125,5 +125,33 @@ class HomeController extends Controller
     return $result;
   }
 
+  public function getCustomerList()
+  {
+    $header = "customer_list";
+
+    $customer = Customer::paginate(15);
+
+    return view('customer_list',compact('header','customer'));
+  }
+
+  public function getCustomerInfo(Request $request)
+  {
+    $header = "customer_list";
+
+    $customer = Customer::where('id',$request->id)->first();
+    $date = new \DateTime($customer->dob);
+    $customer->date_birth = $date->format('Y-m-d');
+    $date = new \DateTime($customer->created_at);
+    $customer->create = $date->format('Y-m-d');
+    $date = new \DateTime($customer->updated_at);
+    $customer->update = $date->format('Y-m-d');
+
+    $transaction = Customer_transaction::join('category','category.id','=','customer_transaction.category_purchase')
+                                        ->join('brand','brand.id','=','customer_transaction.brand_id')
+                                        ->select('customer_transaction.*','category.name as category_name','brand.name as brand_name')
+                                        ->get();
+
+    return view('customer_info',compact('header','customer','transaction'));
+  }
 
 }

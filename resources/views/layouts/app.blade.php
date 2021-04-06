@@ -10,6 +10,10 @@
 <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+
 </head>
 <body>
 
@@ -144,7 +148,7 @@
 	          </li>
 
             <li>
-              <a href="#" class="">
+              <a href="{{route('getCustomerList')}}" class="{{ ($header == 'customer_list') ? 'mm-active' : '' }}">
                 <i class="metismenu-icon pe-7s-id"></i>
                 Customer List
               </a>
