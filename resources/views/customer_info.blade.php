@@ -17,6 +17,7 @@
 <div class="card" style="margin-bottom: 5px;">
   <div class="card-header">
     Customer Details Data
+    <input type="text" hidden id="id" value="{{$customer->id}}" />
   </div>
   <div class="card-body">
     <div class="row">
@@ -112,6 +113,47 @@ $(document).ready(function(){
   });
 
   $('#history').DataTable();
+
+  $("#modify").click(function(){
+    let emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+    if($("input[name=name]").val() == ''){
+      swal.fire('Error','Please Fill Up The Customer Name','error');
+
+    }else if($("input[name=email]").val() == '' || !emailReg.test($("input[name=email]").val()) ){
+      swal.fire('Error','Please Make Sure The Email Is Not Empty And Correct Format','error');
+
+    }else if($("input[name=contact]").val() == '' || $("input[name=contact]").val().length < 9 || $("input[name=contact]").val().length > 10){
+      swal.fire('Error','Please Make Sure Contact Number Is Not Empty And Within 9 to 10 Digit','error');
+
+    }else if($("input[name=dob]").val() == ''){
+      swal.fire('Error','Please Fill Up The Date Of Birth','error');
+
+    }else{
+
+      $.post('{{ route('ajaxModifyCustomer') }}',
+      {
+        '_token' : '{{ csrf_token() }}',
+        'id' : $("#id").val(),
+        'name' : $("input[name=name]").val(),
+        'email' : $("input[name=email]").val(),
+        'contact' : $("input[name=contact]").val(),
+        'dob' : $("input[name=dob]").val(),
+
+      },function(data){
+
+        if(data){
+          swal.fire('Success','Update Successful','success');
+        }else{
+          swal.fire('Fail','Update Failure, Please Contact IT Support','error');
+        }
+
+
+      },'json');
+
+    }
+
+  });
 
 });
 </script>

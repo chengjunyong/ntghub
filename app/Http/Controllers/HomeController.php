@@ -154,4 +154,23 @@ class HomeController extends Controller
     return view('customer_info',compact('header','customer','transaction'));
   }
 
+  public function ajaxModifyCustomer(Request $request)
+  {
+    try{
+      $result =  Customer::where('id',$request->id)
+                          ->update([
+                            'name' => $request->name,
+                            'email' => $request->email,
+                            'contact' => "+60".$request->contact,
+                            'dob' => $request->dob,
+                          ]);
+
+      return $result;
+
+    }catch(Throwable $e){
+      report($e);
+    }
+
+  }
+
 }

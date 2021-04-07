@@ -28,3 +28,5 @@ Route::post('/Verification','HomeController@postVerification')->name('postVerifi
 Route::post('/getCustomerDetails','HomeController@getCustomerDetails')->name('getCustomerDetails');
 Route::get('/CustomerList','HomeController@getCustomerList')->name('getCustomerList');
 Route::get('/CustomerDetails/{id}','HomeController@getCustomerInfo')->name('getCustomerInfo');
+
+Route::post('ModifyCustomer','HomeController@ajaxModifyCustomer')->name('ajaxModifyCustomer');
