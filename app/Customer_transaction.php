@@ -14,5 +14,6 @@ class Customer_transaction extends Model
       'serial_code',
       'notes',
       'warranty_end_date',
+      'under_warranty',
     ];
 }

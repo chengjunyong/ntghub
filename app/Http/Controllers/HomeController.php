@@ -82,6 +82,7 @@ class HomeController extends Controller
         'serial_code' => $request->serial_code,
         'notes' => $request->notes,
         'warranty_end_date' => $request->warranty,
+        'under_warranty' => $request->under_warranty,
       ]);
 
       return back()->with('success','true');

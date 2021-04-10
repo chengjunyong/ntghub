@@ -81,11 +81,24 @@
             <input type="text" name="user_id" id="user_id" hidden required />
             <div class="col-md-12">
               <label>Category</label>
-              <select name="category_id" class="form-control">
+              <select name="category_id" id="category_id" class="form-control">
                 @foreach($category as $result)
                   <option value="{{$result->id}}">{{$result->name}}</option>
                 @endforeach
               </select>
+            </div>
+
+            <div class="col-md-12" id="sec_underwarranty">
+              <label>Under Warranty</label>
+              <select name="under_warranty" id="under_warranty" class="form-control">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+
+            <div class="col-md-12" id="sec_warranty" hidden>
+              <label>Warranty</label>
+              <input type="date" id="warranty" name="warranty" class="form-control" placeholder="Warranty End Date" disabled/>
             </div>
             <div class="col-md-12">
               <label>Brand</label>
@@ -96,12 +109,8 @@
               </select>
             </div>
             <div class="col-md-12">
-              <label>Warranty</label>
-              <input type="date" id="warranty" name="warranty" class="form-control" placeholder="Warranty End Date" required />
-            </div>
-            <div class="col-md-12">
               <label>Serial Code (IMEI Number)</label>
-              <input type="text" id="serial_code" name="serial_code" class="form-control" placeholder="Product Code or IMEI Number (Mobile)" required />
+              <input type="text" id="serial_code" name="serial_code" class="form-control" placeholder="Product Code or IMEI Number (Mobile)" />
             </div>
             <div class="col-md-12">
               <label>Notes</label>
@@ -156,13 +165,35 @@ $(document).ready(function(){
 
   $("input[type=submit]").click(function(){
 
-    if($("#user_id").val() == "" && $("#warranty").val() != "" && $("#serial_code").val() != ""){
+    if($("#user_id").val() == ""){
       swal.fire(
         'No Customer Detected',
         'Please Scan Member Card Or Insert Member ID To Find Customer Data',
         'error',
       )
     }
+  });
+
+  $("#category_id").change(function(){
+
+    if($(this).val() != 1){
+      $("#sec_underwarranty").prop('hidden',true);
+      $("#under_warranty").prop('disabled',true);
+
+    }else{
+      $("#sec_underwarranty").prop('hidden',false);
+      $("#under_warranty").prop('disabled',false);
+    }
+
+    if($(this).val() != 2){
+      $("#sec_warranty").prop('hidden',true);
+      $("#warranty").prop('disabled',true);
+
+    }else{
+      $("#sec_warranty").prop('hidden',false);
+      $("#warranty").prop('disabled',false);
+    }
+
   });
 
   function getDetail(){
