@@ -210,7 +210,7 @@ class HomeController extends Controller
 
     foreach($request->template as $result){
       if($result->getClientOriginalExtension() != "html"){
-        $content = str_replace("images/".$result->getClientOriginalName(),url('storage/'.$request->title.'/images/'.$result->getClientOriginalName()),$content);
+        $content = str_replace("images/".$result->getClientOriginalName(),url('storage/email/'.$request->template_name.'/images/'.$result->getClientOriginalName()),$content);
       }
     }
 
