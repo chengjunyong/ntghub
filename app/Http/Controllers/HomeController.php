@@ -207,14 +207,16 @@ class HomeController extends Controller
     }
 
     $content = Storage::get('public/email/'.$request->template_name."/".$request->template_name.".html");
+
     foreach($request->template as $result){
       if($result->getClientOriginalExtension() != "html"){
-        $content = str_replace("images/".$result->getClientOriginalName(),url('storage/email/'.$request->template_name.'/images/'.$result->getClientOriginalName()),$content);
-        Storage::put($request->template_name."/".$request->template_name.".html",$content);
-
-        dd($content,"images/".$result->getClientOriginalName(),url('storage/email/'.$request->template_name.'/images/'.$result->getClientOriginalName()));
+        $content = str_replace("images/".$result->getClientOriginalName(),url('storage/'.$request->title.'/images/'.$result->getClientOriginalName()),$content);
       }
     }
+
+    $content = str_replace("http://www.example.com","https://ntghub.com",$content);
+    Storage::put("public/email/".$request->template_name."/".$request->template_name.".html",$content);
+
 
     template::create([
       "category" => 1,
