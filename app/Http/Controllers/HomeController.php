@@ -7,6 +7,10 @@ use App\Customer;
 use App\Customer_transaction;
 use App\Category;
 use App\Brand;
+use App\Template;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Marketing;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -171,6 +175,54 @@ class HomeController extends Controller
     }catch(Throwable $e){
       report($e);
     }
+  }
+
+  public function testmail()
+  {
+    Mail::to("ycheng391@gmail.com")->send(new Marketing());
+
+    return "Done";
+  }
+
+  public function getUploadTemplate()
+  {
+    $header = "marketing";
+
+    return view('email_template',compact('header'));
+  }
+
+  public function postUploadTemplate(Request $request)
+  {
+
+    $image_path = "public/email/".$request->template_name."/images";
+    $path = "public/email/".$request->template_name;
+    Storage::makeDirectory("public/email/".$request->template_name."/images");
+
+    foreach($request->template as $result){
+      if($result->getClientOriginalExtension() == "html"){
+        $full = $result->storeAs($path,$request->template_name.".".$result->getClientOriginalExtension());
+      }else{
+        $result->storeAs($image_path,$result->getClientOriginalName());
+      }
+    }
+
+    $content = Storage::get('public/email/'.$request->template_name."/".$request->template_name.".html");
+    foreach($request->template as $result){
+      if($result->getClientOriginalExtension() != "html"){
+        $content = str_replace("images/".$result->getClientOriginalName(),url('storage/email/'.$request->template_name.'/images/'.$result->getClientOriginalName()),$content);
+        Storage::put($request->template_name."/".$request->template_name.".html",$content);
+
+        dd($content,"images/".$result->getClientOriginalName(),url('storage/email/'.$request->template_name.'/images/'.$result->getClientOriginalName()));
+      }
+    }
+
+    template::create([
+      "category" => 1,
+      "template_name" => $request->template_name,
+      "dir" => url('storage/email/'.$request->template_name),
+    ]);
+
+    return "done";
 
   }
 

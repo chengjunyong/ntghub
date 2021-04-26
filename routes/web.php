@@ -30,3 +30,10 @@ Route::get('/CustomerList','HomeController@getCustomerList')->name('getCustomerL
 Route::get('/CustomerDetails/{id}','HomeController@getCustomerInfo')->name('getCustomerInfo');
 
 Route::post('ModifyCustomer','HomeController@ajaxModifyCustomer')->name('ajaxModifyCustomer');
+
+//Email
+Route::get('/testmail','HomeController@testmail')->name('testmail');
+
+//Marketing
+Route::get('/UploadTemplate','HomeController@getUploadTemplate')->name('getUploadTemplate');
+Route::post('/UploadTemplate','HomeController@postUploadTemplate')->name('postUploadTemplate');

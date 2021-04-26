@@ -171,7 +171,7 @@
                 Report List
                 <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
               </a>
-              <ul class="">
+              <ul>
                 <li>
                   <a href="#">
                     <i class="metismenu-icon"></i>
@@ -186,6 +186,34 @@
                 </li>
               </ul>
 	          </li>
+
+            <li class="app-sidebar__heading">
+              Marketing
+            </li>
+
+            <li class="{{($header == 'marketing') ? 'mm-active' : ''}}">
+              <a href="">
+                <i class="metismenu-icon pe-7s-mail-open-file"></i>
+                Email
+                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+              </a>
+              <ul>
+                <li>
+                  <a href="{{route('getUploadTemplate')}}">
+                    <i class="metismenu-icon"></i>
+                    Upload Template
+                  </a>
+                </li>
+<!--                 <li>
+                  <a href="#">
+                    <i class="metismenu-icon"></i>
+                    Report 2
+                  </a>
+                </li> -->
+              </ul>
+            </li>
+
+
 
 
 
