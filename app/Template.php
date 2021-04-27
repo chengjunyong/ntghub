@@ -11,5 +11,6 @@ class Template extends Model
       'template_name',
       'category',
       'dir',
+      'path',
     ];
 }

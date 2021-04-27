@@ -18,6 +18,7 @@ class CreateTemplateTable extends Migration
             $table->string('category')->nullable();
             $table->text('template_name');
             $table->text('dir');
+            $table->text('path');
             $table->timestamps();
         });
     }

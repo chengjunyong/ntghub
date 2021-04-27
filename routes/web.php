@@ -37,3 +37,4 @@ Route::get('/testmail','HomeController@testmail')->name('testmail');
 //Marketing
 Route::get('/UploadTemplate','HomeController@getUploadTemplate')->name('getUploadTemplate');
 Route::post('/UploadTemplate','HomeController@postUploadTemplate')->name('postUploadTemplate');
+Route::get('/TestEmail','HomeController@getTestEmail')->name('getTestEmail');

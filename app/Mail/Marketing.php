@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Template;
+use Illuminate\Support\Facades\Storage;
 
 class Marketing extends Mailable
 {
@@ -16,9 +18,9 @@ class Marketing extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($content)
     {
-        //
+      $this->content = $content;
     }
 
     /**
@@ -28,6 +30,9 @@ class Marketing extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.test');
+      $content = $this->content;
+
+      return $this->subject("Email Trial")
+                  ->markdown('emails.test_email',compact("content"));
     }
 }

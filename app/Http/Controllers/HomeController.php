@@ -11,6 +11,7 @@ use App\Template;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Marketing;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Mail\Mailable;
 
 class HomeController extends Controller
 {
@@ -179,7 +180,7 @@ class HomeController extends Controller
 
   public function testmail()
   {
-    Mail::to("ycheng391@gmail.com")->send(new Marketing());
+    Mail::to("ycheng391@gmail.com")->send(new Marketing("abc"));
 
     return "Done";
   }
@@ -188,7 +189,9 @@ class HomeController extends Controller
   {
     $header = "marketing";
 
-    return view('email_template',compact('header'));
+    $template = Template::paginate(15);
+
+    return view('email_template',compact('header','template'));
   }
 
   public function postUploadTemplate(Request $request)
@@ -217,15 +220,28 @@ class HomeController extends Controller
     $content = str_replace("http://www.example.com","https://ntghub.com",$content);
     Storage::put("public/email/".$request->template_name."/".$request->template_name.".html",$content);
 
-
-    template::create([
-      "category" => 1,
-      "template_name" => $request->template_name,
-      "dir" => url('storage/email/'.$request->template_name),
+    template::updateOrCreate(
+      ["template_name" => $request->template_name,],
+      [ "category" => 1,
+      "dir" => url('storage/email/'.$request->template_name."/".$request->template_name.".html"),
+      "path" => 'public/email/'.$request->template_name."/".$request->template_name.".html",
     ]);
 
-    return "done";
+    return back()->with('success','pass');
+  }
 
+  public function getTestEmail(Request $request)
+  {
+    $template = Template::where('id',$request->email_id)->first();
+    $content = Storage::get($template->path);
+
+    Mail::to($request->email)->send(new Marketing($content));
+
+    if(Mail::failures()){
+      return "false";
+    }else{
+      return "true";
+    }
   }
 
 }
