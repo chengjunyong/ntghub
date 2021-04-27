@@ -70,6 +70,14 @@
           <label>Date Of Birth</label><br/>
           <input type="date" name="customer_dob" class="form-control" required/>
         </div>
+        <div class="col-md-6">
+          <label>Preference Language</label><br/>
+          <select name="prefer_language" class="form-control" required>
+            <option value="Chinese">Chinese</option>
+            <option value="Malay">Malay</option>
+            <option value="English">English</option>
+          </select>
+        </div>
         <div class="col-md-12" style="margin-top: 20px;text-align: center">
           <input type="reset" class="btn btn-danger" value="Reset" />
           <input type="submit" class="btn btn-primary" value="Create" />

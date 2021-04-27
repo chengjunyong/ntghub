@@ -54,6 +54,7 @@ class HomeController extends Controller
         'dob' => $request->customer_dob,
         'card_id' => $request->card_id,
         'card_code' => $request->card_code,
+        'prefer_language' => $request->prefer_language,
       ]);
 
       return back()->with('success','true');
@@ -169,6 +170,7 @@ class HomeController extends Controller
                             'email' => $request->email,
                             'contact' => "+60".$request->contact,
                             'dob' => $request->dob,
+                            'prefer_language' => $request->prefer_language,
                           ]);
 
       return $result;

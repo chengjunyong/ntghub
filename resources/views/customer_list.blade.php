@@ -28,6 +28,7 @@
               <th scope="col">E-mail</th>
               <th scope="col">Contact</th>
               <th scope="col">Date Of Birth</th>
+              <th scope="col">Preference Language</th>
               <th scope="col">Registered Date</th>
               <th scope="col"></th>
             </tr>
@@ -39,6 +40,7 @@
                 <td>{{$result->email}}</td>
                 <td>{{$result->contact}}</td>
                 <td>{{$result->dob}}</td>
+                <td>{{$result->prefer_language}}</td>
                 <td>{{$result->created_at}}</td>
                 <td><button class="btn btn-primary" onclick="window.location.assign('{{ route('getCustomerInfo',$result->id) }} ')">Details</button></td>
               </tr>

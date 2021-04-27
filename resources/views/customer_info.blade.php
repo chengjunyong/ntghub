@@ -43,12 +43,20 @@
             <div class="input-group-prepend">
               <span class="input-group-text">+60</span>
             </div>
-            <input type="number" name="contact" class="form-control" placeholder="9 or 10 Digit" value="{{ substr($customer->contact,3) }}"/>
+            <input type="number" name="contact" class="form-control" placeholder="9 or 10 Digit" value="{{ $customer->contact }}"/>
           </div>
       </div>
       <div class="col-md-6">
         <label>Date Of Birth</label>
-        <input type="date" name="dob" value="{{$customer->date_birth}}" class="form-control">
+        <input type="date" name="dob" value="{{$customer->date_birth}}" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label>Preference Language</label>
+        <select class="form-control" name="prefer_language" required>
+          <option value="Chinese" {{ ($customer->prefer_language == "Chinese") ? 'selected' : '' }}>Chinese</option>
+          <option value="Malay" {{ ($customer->prefer_language == "Malay") ? 'selected' : '' }}>Malay</option>
+          <option value="English" {{ ($customer->prefer_language == "English") ? 'selected' : '' }}>English</option>
+        </select>
       </div>
       <div class="col-md-6">
         <label>Registered Date</label>
@@ -139,6 +147,7 @@ $(document).ready(function(){
         'email' : $("input[name=email]").val(),
         'contact' : $("input[name=contact]").val(),
         'dob' : $("input[name=dob]").val(),
+        'prefer_language' : $("select[name=prefer_language]").val(),
 
       },function(data){
 

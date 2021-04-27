@@ -14,5 +14,6 @@ class Customer extends Model
       'card_id',
       'dob',
       'contact',
+      'prefer_language',
     ];
 }
