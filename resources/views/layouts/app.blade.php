@@ -161,7 +161,7 @@
 	            </a>
 	          </li>
 
-            <li class="app-sidebar__heading">
+            <!-- <li class="app-sidebar__heading">
               Report
             </li>
 
@@ -185,7 +185,7 @@
                   </a>
                 </li>
               </ul>
-	          </li>
+	          </li> -->
 
             <li class="app-sidebar__heading">
               Marketing
